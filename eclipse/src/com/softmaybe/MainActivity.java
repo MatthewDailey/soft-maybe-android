@@ -1,5 +1,6 @@
 package com.softmaybe;
 
+import com.softmaybe.rest.SoftMaybeEndpointProvider;
 import com.softmaybe.util.Prefs;
 
 import android.content.Intent;
@@ -70,8 +71,9 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void storeReminderAndClose(String email, String sharedText) {
-		// TODO (matt): Store a reminder in softmaybe.com.
+		// TODO (matt): Parse url from shared text.
 		// TODO (matt): Toast message when storing reminder.
+		SoftMaybeEndpointProvider.get().api(email, sharedText);
 		Log.i(TAG, "Setting reminder for sharedText:'" + sharedText + "' and"
 				+ " email:" + email);
 		finish();
