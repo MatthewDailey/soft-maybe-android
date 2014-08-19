@@ -54,6 +54,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void saveEmailAndClose() {
+		// TODO (matt): Toast message when closing.
 		TextView emailInputView = (TextView) findViewById(R.id.email_input);
 		String email = emailInputView.getText().toString();
 		Prefs.setEmail(email, getBaseContext());
@@ -70,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void storeReminderAndClose(String email, String sharedText) {
 		// TODO (matt): Store a reminder in softmaybe.com.
+		// TODO (matt): Toast message when storing reminder.
 		Log.i(TAG, "Setting reminder for sharedText:'" + sharedText + "' and"
 				+ " email:" + email);
 		finish();
