@@ -72,8 +72,8 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void storeReminderAndClose(String email, String sharedText) {
 		// TODO (matt): Parse url from shared text.
+		// TODO (matt): Launch async write to soft maybe.
 		// TODO (matt): Toast message when storing reminder.
-		SoftMaybeEndpointProvider.get().api(email, sharedText);
 		Log.i(TAG, "Setting reminder for sharedText:'" + sharedText + "' and"
 				+ " email:" + email);
 		finish();
