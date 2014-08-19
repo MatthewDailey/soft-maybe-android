@@ -1,8 +1,5 @@
 package com.softmaybe;
 
-import com.softmaybe.rest.SoftMaybeEndpointProvider;
-import com.softmaybe.util.Prefs;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.softmaybe.rest.ApiRequest;
+import com.softmaybe.rest.ApiTask;
+import com.softmaybe.util.Prefs;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -72,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void storeReminderAndClose(String email, String sharedText) {
 		// TODO (matt): Parse url from shared text.
-		// TODO (matt): Launch async write to soft maybe.
+		new ApiTask().execute(new ApiRequest(email, sharedText));
 		// TODO (matt): Toast message when storing reminder.
 		Log.i(TAG, "Setting reminder for sharedText:'" + sharedText + "' and"
 				+ " email:" + email);
