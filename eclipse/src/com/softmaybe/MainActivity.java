@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.common.base.Optional;
 import com.softmaybe.rest.ApiRequest;
 import com.softmaybe.rest.ApiTask;
 import com.softmaybe.util.Prefs;
+import com.softmaybe.util.Urls;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -72,11 +74,15 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void storeReminderAndClose(String email, String sharedText) {
-		// TODO (matt): Parse url from shared text.
-		new ApiTask().execute(new ApiRequest(email, sharedText));
-		// TODO (matt): Toast message when storing reminder.
-		Log.i(TAG, "Setting reminder for sharedText:'" + sharedText + "' and"
-				+ " email:" + email);
+		Optional<String> url = Urls.findFirstUrl(sharedText.split(" "));
+		if (url.isPresent()) {
+			ApiRequest request = new ApiRequest(email, url.get());
+			new ApiTask().execute(request);
+			// TODO (matt): Toast message when storing reminder.
+			Log.i(TAG, request.toString());
+		} else {
+			Log.i(TAG, "Unable to parse event url from : " +  sharedText);
+		}
 		finish();
 	}
 
