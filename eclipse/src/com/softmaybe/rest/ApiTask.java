@@ -1,11 +1,20 @@
 package com.softmaybe.rest;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.softmaybe.util.Toasts;
 
 public class ApiTask extends AsyncTask<ApiRequest, Void, ApiResult> {
 
 	private final static String TAG = "ApiRequest";
+	
+	private final Activity context;
+	
+	public ApiTask(Activity context) {
+		this.context = context;
+	}
 	
 	@Override
 	protected ApiResult doInBackground(ApiRequest... params) {
@@ -20,7 +29,11 @@ public class ApiTask extends AsyncTask<ApiRequest, Void, ApiResult> {
 	}
 	
 	protected void onPostExecute(ApiResult result) {
-		// TODO (matt): Show toast on result.
+		if (result.isSuccess()) {
+			Toasts.slow(context, "Added Reminder:\n" + result.getName());
+		} else {
+			Toasts.slow(context, "Failure!\n" + result.getMessage());
+		}
 		Log.i(TAG, result.toString());
 	}
 }

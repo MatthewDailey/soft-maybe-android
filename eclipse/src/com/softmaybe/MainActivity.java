@@ -12,6 +12,7 @@ import com.google.common.base.Optional;
 import com.softmaybe.rest.ApiRequest;
 import com.softmaybe.rest.ApiTask;
 import com.softmaybe.util.Prefs;
+import com.softmaybe.util.Toasts;
 import com.softmaybe.util.Urls;
 
 public class MainActivity extends ActionBarActivity {
@@ -58,10 +59,10 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void saveEmailAndClose() {
-		// TODO (matt): Toast message when closing.
 		TextView emailInputView = (TextView) findViewById(R.id.email_input);
 		String email = emailInputView.getText().toString();
 		Prefs.setEmail(email, getBaseContext());
+		Toasts.slow(this, "Email set:\n" + email);
 
 		// If the event text is set, we'll try to store an event.
 		TextView eventTextView = (TextView) findViewById(R.id.event_text);
@@ -77,8 +78,8 @@ public class MainActivity extends ActionBarActivity {
 		Optional<String> url = Urls.findFirstUrl(sharedText.split(" "));
 		if (url.isPresent()) {
 			ApiRequest request = new ApiRequest(email, url.get());
-			new ApiTask().execute(request);
-			// TODO (matt): Toast message when storing reminder.
+			new ApiTask(this).execute(request);
+			Toasts.slow(this, "Setting reminder...");
 			Log.i(TAG, request.toString());
 		} else {
 			Log.i(TAG, "Unable to parse event url from : " +  sharedText);
