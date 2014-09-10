@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void storeReminderAndClose(String email, String sharedText) {
-		Optional<String> url = Urls.findFirstUrl(sharedText.split(" "));
+		Optional<String> url = Urls.findFirstUrl(sharedText.split("\\s+"));
 		if (url.isPresent()) {
 			ApiRequest request = new ApiRequest(email, url.get());
 			new ApiTask(this).execute(request);
