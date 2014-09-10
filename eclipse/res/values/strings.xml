@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">A Soft Maybe</string>
+    <string name="app_name">Soft Maybe</string>
+    <string name="share_name">Add a Soft Maybe</string>
     <string name="action_settings">Settings</string>
     <string name="action_save">Save &amp; Close</string>
     <string name="default_event_text">Enter an email address and share events to Soft Maybe. We\'ll send you an email a few days before the event.</string>
+    <string name="title_activity_share">ShareActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
